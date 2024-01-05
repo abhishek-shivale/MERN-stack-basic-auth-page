@@ -14,7 +14,6 @@ router.post('/register',async (req,res)=>{
             msg: "You sent a wrong input",
             error
         })
-        return
     }
     const email = verifyReq.email
    try{ 
@@ -24,7 +23,7 @@ router.post('/register',async (req,res)=>{
         res.json({
             msg: "User alredy exists"
         })
-       return;
+       
     }
     }catch(err){
         console.error(err)

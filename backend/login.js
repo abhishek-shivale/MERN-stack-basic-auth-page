@@ -12,7 +12,7 @@ router.post('/login', async (req, res)=>{
             msg: "You sent a wrong input",
             error
         })
-        return
+    
     }
     try {
         const user = await registerDb.register.findOne({ email: reqForlogin.email }).exec();

@@ -4,31 +4,19 @@ function login() {
 const [email,setEmail] = useState('')
 const [password,setPassword] = useState('')
 const [update, setUpdate] = useState('')
-async function btnHandler() {
-  console.log(email,password)
-  try {
-    const response = await fetch(`http://localhost:3001/login`, {
-      method: "POST",
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        email: email,
-        password: password
+async function tryLogin(){
+  await fetch(`http://localhost:3001/login`,{
+          method: "POST",
+          body: JSON.stringify({
+              email: email,
+              password: password
+          }), headers: {"Content-type":"application/json"}
       })
-
-    });
-  
-    if (!response.ok) {
-      throw new Error('Network response was not ok.');
-    }
-    const json = await response.json();
-    console.log(json);
-    setUpdate(json);
-  } catch (error) {
-    console.error('There was a problem with the fetch operation:', error);
+  .then(async function(res){
+          const json = await res.json();
+          setUpdate(json)
+   })
   }
-}
 
   return (
     <div className='login-container'>
@@ -48,7 +36,7 @@ async function btnHandler() {
             value={password}
             />
         </div>
-        <button type="submit" className='login-button'onClick={()=>{btnHandler}}>Login</button>
+        <button type="submit" className='login-button' onClick={tryLogin}>Login</button>
         <p className='register-link'>Don't have an account? <a href="/register">Register</a></p>
         <p>{update}</p>
     </form>
