@@ -6,13 +6,11 @@ const schemaZod = require('./zod');
 
 router.post('/login', async (req, res)=>{
     const reqForlogin = req.body;
-    const verifyLogin = schemaZod.loginZod.parse(reqForlogin)
+    const verifyLogin = schemaZod.loginZod.safeParse(reqForlogin)
     if(verifyLogin.error){
-        res.status(411).json({
-            msg: "You sent a wrong input",
-            error
-        })
-    
+        res.json({
+            msg: "You sent a wrong input"
+        }) 
     }
     try {
         const user = await registerDb.register.findOne({ email: reqForlogin.email }).exec();
@@ -33,7 +31,10 @@ router.post('/login', async (req, res)=>{
             console.log('User not found');
         }
     } catch (error) {
-        console.error(error);
+        res.json({
+            msg: "You sent a wrong input"
+        }) 
+        // console.error(error);
     }
     
 })
