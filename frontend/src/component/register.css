@@ -1,4 +1,4 @@
-/* *{
+*{
     margin: 0%;
     padding: 0%;
     box-sizing: border-box;
@@ -67,7 +67,7 @@ label {
     background-color: #0077cc;
 }
 
-.register-link {
+.login-link {
     margin-top: 15px;
     font-size: 14px;
-} */
+}
