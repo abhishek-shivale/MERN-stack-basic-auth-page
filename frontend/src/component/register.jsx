@@ -14,7 +14,7 @@ function register() {
           email: email,
           password: password
         }),
-        headers:{'content-type': 'application/json'}
+        headers: { 'Content-type': 'application/json' },
       })
        console.log('---------->data', data);
     const jsonData = await data.json();
